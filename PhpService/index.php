@@ -1,5 +1,5 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
-echo "Bonjour, mon prénom est Minh Hoang Anh!";
+echo "Bonjour Minh Hoang Anh";
 ?>

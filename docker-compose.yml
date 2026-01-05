@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  php-service:
+    build: ./PhpService
+    container_name: php-service
+    ports:
+      - "8081:80"
+    networks:
+      - app-network
+
+  rental-service:
+    build: ./RentalService
+    container_name: rental-service
+    ports:
+      - "8080:8080"
+    environment:
+      - PHP_SERVICE_URL=http://php-service
+    depends_on:
+      - php-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
