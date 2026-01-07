@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpservice
+  template:
+    metadata:
+      labels:
+        app: phpservice
+    spec:
+      containers:
+      - name: phpservice-container
+        image: nozomu05/php-prenom-service:latest
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javaservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javaservice
+  template:
+    metadata:
+      labels:
+        app: javaservice
+    spec:
+      containers:
+        - name: javaservice-container
+          image: nozomu05/rental-service:latest
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpservice-service
+spec:
+  ports:
+    - name: http
+      targetPort: 80
+      port: 80
+      nodePort: 31280
+  type: NodePort
+  selector:
+    app: phpservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javaservice-service
+spec:
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 8080
+      nodePort: 31281
+  type: NodePort
+  selector:
+    app: javaservice
