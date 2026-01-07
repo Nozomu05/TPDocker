@@ -45,8 +45,7 @@ spec:
     - name: http
       targetPort: 80
       port: 80
-      nodePort: 31280
-  type: NodePort
+  type: ClusterIP
   selector:
     app: phpservice
 ---
@@ -59,7 +58,6 @@ spec:
     - name: http
       targetPort: 8080
       port: 8080
-      nodePort: 31281
-  type: NodePort
+  type: ClusterIP
   selector:
     app: javaservice

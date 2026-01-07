@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: services-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: phpservice.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpservice-service
+                port:
+                  number: 80
+    - host: javaservice.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: javaservice-service
+                port:
+                  number: 8080
