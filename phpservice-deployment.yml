@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpservice
+  template:
+    metadata:
+      labels:
+        app: phpservice
+    spec:
+      containers:
+        - image: nozomu05/php-prenom-service:latest
+          imagePullPolicy: IfNotPresent
+          name: phpservice
+      restartPolicy: Always

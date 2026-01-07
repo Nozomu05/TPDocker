@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javaservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javaservice
+  template:
+    metadata:
+      labels:
+        app: javaservice
+    spec:
+      containers:
+        - image: nozomu05/rental-service:latest
+          imagePullPolicy: IfNotPresent
+          name: javaservice
+      restartPolicy: Always
